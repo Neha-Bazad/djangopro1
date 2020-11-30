@@ -1,0 +1,10 @@
+li a {
+    color: green;
+    font-size : 24px;
+}
+body {
+    background: white url("image/flower.webp") no-repeat center center fixed;
+    /*background-size: auto;
+    background-size: cover;*/
+    background-size: 1250px 550px;
+}
