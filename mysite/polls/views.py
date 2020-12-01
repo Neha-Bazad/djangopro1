@@ -77,7 +77,7 @@ class ResultsView(generic.DetailView):
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice = question.choices.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
@@ -94,10 +94,10 @@ def vote(request, question_id):
 
 # Create your views here.
 
-'''class QuestionViewSet(viewsets.ModelViewSet):     # use for both question and choices
+class QuestionViewSet(viewsets.ModelViewSet):     # use for both question and choices
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [permissions.IsAuthenticated]'''
+    permission_classes = [permissions.IsAuthenticated]
 
 '''class ChoiceViewSet(viewsets.ModelViewSet):        #use for choice json
     queryset = Choice.objects.all()

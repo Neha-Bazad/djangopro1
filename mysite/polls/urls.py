@@ -11,18 +11,22 @@ app_name = 'polls'
     path('<int:question_id>/vote/', views.vote, name='vote'),
 ]'''
 #generic code
+'''urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+    path('<int:question_id>/vote/', views.vote, name='vote'),
+]'''
+
+router = routers.DefaultRouter()
+router.register(r'', views.QuestionViewSet)    #use Choice.ViewSet for choice json
+#router.register(r'choice', views.ChoiceViewSet)
+
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
-]
-
-'''router = routers.DefaultRouter()
-router.register(r'question', views.QuestionViewSet)    #use Choice.ViewSet for choice json
-#router.register(r'choice', views.ChoiceViewSet)
-
-urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-]'''
+]
